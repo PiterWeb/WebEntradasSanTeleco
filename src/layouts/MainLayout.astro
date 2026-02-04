@@ -7,13 +7,12 @@
 <html lang="es">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
-        
         <ClientRouter />
         
         <title>Entradas SanTeleco</title>
+        <meta name="description" content="Reserva tus entradas para SanTeleco">
     </head>
     <body>
 
@@ -59,11 +58,11 @@
             </div>
         </header>
         
-        <section class="grid h-screen items-start bg-gray-900">
+        <main class="grid h-screen items-start bg-gray-900">
           <div class="mx-auto w-screen max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
               <slot transition:animate="slide" />
           </div>
-        </section>
+        </main>
         
     </body>
 </html>
