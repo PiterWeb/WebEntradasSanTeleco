@@ -9,8 +9,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.17.1",
-    "tailwindcss": "^4.1.18"
+    "@astrojs/node": "9.5.2",
+    "@astrojs/vercel": "9.0.4",
+    "@libsql/client": "0.17.0",
+    "@tailwindcss/vite": "4.1.18",
+    "astro": "5.17.1",
+    "dotenv": "17.2.3",
+    "drizzle-orm": "0.45.1",
+    "drizzle-zod": "0.8.3",
+    "tailwindcss": "4.1.18"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.31.8",
+    "tsx": "4.21.0"
   }
 }

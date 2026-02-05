@@ -3,13 +3,13 @@ import MainLayout from "../layouts/MainLayout.astro"
 ---
 
 <MainLayout>
-    <form action="#" class="mx-auto max-w-md space-y-4 rounded-lg border p-6 border-gray-600 bg-gray-800">
+    <form action="/api/reserva" method="post" enctype="multipart/form-data" class="mx-auto max-w-md space-y-4 rounded-lg border p-6 border-gray-600 bg-gray-800">
       <div>
-        <label class="block text-sm font-medium text-white" for="name">
+        <label class="block text-sm font-medium text-white" for="full_name">
             Nombre completo
         </label>
     
-        <input class="mt-1 w-full p-3 rounded-lg focus:border-indigo-500 focus:outline-none border-gray-600 bg-gray-900 text-white" id="name" type="text" placeholder="Nombre Apellido Apellido">
+        <input name="full_name" class="mt-1 w-full p-3 rounded-lg focus:border-indigo-500 focus:outline-none border-gray-600 bg-gray-900 text-white" id="full_name" type="text" placeholder="Nombre Apellido Apellido">
       </div>
     
       <div>
@@ -17,7 +17,7 @@ import MainLayout from "../layouts/MainLayout.astro"
             Correo electrónico
         </label>
     
-        <input class="mt-1 w-full p-3 rounded-lg focus:border-indigo-500 focus:outline-none border-gray-600 bg-gray-900 text-white" id="email" type="email" placeholder="ejemplo@gmail.com">
+        <input name="email" class="mt-1 w-full p-3 rounded-lg focus:border-indigo-500 focus:outline-none border-gray-600 bg-gray-900 text-white" id="email" type="email" placeholder="ejemplo@gmail.com">
       </div>
     
       <button class="block w-full rounded-lg border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-700 hover:text-white" type="submit">
