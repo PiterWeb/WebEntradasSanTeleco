@@ -7,5 +7,6 @@ export default defineConfig({
   dialect: 'sqlite',
   dbCredentials: {
     url: process.env.DB_FILE_NAME!,
+    token: process.env.DB_TOKEN!
   },
 });
