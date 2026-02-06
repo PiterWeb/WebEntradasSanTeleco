@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql/web';
 import { reservasTable } from './schema';
+import { eq } from 'drizzle-orm'
 
 const db = drizzle({
   connection: {
@@ -15,4 +16,8 @@ export async function GetReservas() {
 
 export async function RequestReserva(reserva: typeof reservasTable.$inferInsert) {
   return await db.insert(reservasTable).values(reserva)
+}
+
+export async function GetReservaById(id: string) {
+  return await db.select().from(reservasTable).where(eq(reservasTable.id, id))
 }
