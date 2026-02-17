@@ -56,5 +56,5 @@ Now you should use `npx drizzle-kit push` to create the initial database schema
 
 ## How to be able to submit forms
 
-1. Generate custom secret: openssl rand -base64 32
+1. Generate custom secret: openssl rand -base64 48
 2. Add secret to .env HMAC_KEY=<secret>
