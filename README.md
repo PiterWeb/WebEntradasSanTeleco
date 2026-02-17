@@ -34,7 +34,7 @@ All commands are run from the root of the project, from a terminal:
 
 - [LibSQL](https://github.com/tursodatabase/libsql) ([Turso Cloud](https://turso.tech/) or LibSQL Embbedded database)
 - [DrizzleORM](https://orm.drizzle.team/) (Database safe operations with abstraction)
-- [Zod](https://zod.dev/) (Database squema validation)
+- [Zod](https://zod.dev/) (Database schema validation)
 
 ## How to use with local database
 
