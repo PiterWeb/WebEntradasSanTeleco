@@ -1,12 +1,12 @@
-import 'dotenv/config';
+import { getSecret } from "astro:env/server";
 import { drizzle } from 'drizzle-orm/libsql/web';
 import { reservasTable } from './schema';
 import { eq } from 'drizzle-orm'
 
 const db = drizzle({
   connection: {
-    url: process.env.DB_FILE_NAME!,
-    authToken: process.env.DB_TOKEN
+    url: getSecret("DB_FILE_NAME")!,
+    authToken: getSecret("DB_TOKEN")
   }
 });
 

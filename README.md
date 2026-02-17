@@ -53,3 +53,8 @@ By default the project uses turso for the database but you need to do some steps
 2. Add to .env DB_TOKEN=<turso_token>
 
 Now you should use `npx drizzle-kit push` to create the initial database schema
+
+## How to be able to submit forms
+
+1. Generate custom secret: openssl rand -base64 32
+2. Add secret to .env HMAC_KEY=<secret>
