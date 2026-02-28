@@ -49,8 +49,9 @@ Now you should use `npx drizzle-kit push` to create the initial database schema
 
 By default the project uses turso for the database but you need to do some steps to configure it:
 
-1. Add to .env DB_FILE_NAME=<turso_url>
-2. Add to .env DB_TOKEN=<turso_token>
+1. Create turso account and new database
+2. Add to .env DB_FILE_NAME=<turso_url>
+3. Add to .env DB_TOKEN=<turso_token>
 
 Now you should use `npx drizzle-kit push` to create the initial database schema
 
@@ -58,3 +59,11 @@ Now you should use `npx drizzle-kit push` to create the initial database schema
 
 1. Generate custom secret: openssl rand -base64 48
 2. Add secret to .env HMAC_KEY=<secret>
+
+## How to be able to send emails
+
+1. Create a resend account
+2. Create template named "reservation-confirmation" with variable "nombre_completo" and \<img src="cid:qr" \/> for the QR code
+3. Add your custom domain to resend modifying DNS records of the domain
+4. Add secret api key to .env RESEND_API_KEY=<api_key>
+5. Add email address to .env EMAIL_ADDRESS=<email_address> (the address must be in the custom domain added)
