@@ -1,12 +1,17 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { GetReservas, RequestReserva } from "../../lib/db/db";
+import { DeleteReserva, GetReservas, RequestReserva } from "../../lib/db/db";
 import { reservasInsertSchema, reservasTable } from "../../lib/db/schema";
 import * as z from "zod/mini";
 import { sha512 } from "../../lib/utils/hash";
 import { verifySolution } from "altcha-lib";
 import { hmacKey } from "../../lib/challenge/challenge";
+import { Resend } from 'resend';
+import { getSecret } from "astro:env/server";
+import { toDataURL } from "qrcode"
+
+const resend = new Resend(getSecret("RESEND_API_KEY")!);
 
 export const POST = (async ({ request, redirect }) => {
     
@@ -26,18 +31,54 @@ export const POST = (async ({ request, redirect }) => {
     const reservaMailUnsafe = formData.get("email")?.toString()!
     const reservaMail = z.email().parse(reservaMailUnsafe)
     
+    const emailHash = await sha512(reservaMail)
+    
     const reservaUnsafe: typeof reservasTable.$inferInsert = {
       full_name: formData.get("full_name")?.toString()!,
-      emailHash: await sha512(reservaMail)
+      emailHash: emailHash
     }
     
     const reserva = reservasInsertSchema.parse(reservaUnsafe)
     
-    await RequestReserva(reserva)
+    const resultReserva = (await RequestReserva(reserva))[0]
     
-    // Send mail
-    // 
-    // End send mail
+    try {
+  
+      // Qr code
+      const qrBase64 = await toDataURL(JSON.stringify({
+        id: resultReserva.id,
+        email_hash: emailHash
+      }))
+      
+      console.log(qrBase64)
+      
+      // Send mail
+      resend.emails.send({
+        from: getSecret("EMAIL_ADDRESS"),
+        to: reservaMail,
+        template: {
+          id: 'reservation-confirmation', // Plantilla definida en resend.com
+          variables: {
+            nombre_completo: reserva.full_name
+          },
+        },
+        attachments: [  
+          {
+            content: qrBase64.slice("data:image/png;base64,".length),
+            filename: "qr.png",
+            contentId: "qr"
+          }
+        ]
+      });
+    
+    } catch(e) {
+      
+      if (resultReserva.id) {
+        await DeleteReserva(resultReserva.id)
+      }
+      
+      throw e
+    }
     
     return redirect(`/reservado`)
     

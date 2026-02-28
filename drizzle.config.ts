@@ -7,6 +7,6 @@ export default defineConfig({
   dialect: 'turso', // cambiar a sqlite para usar en local
   dbCredentials: {
     url: process.env.DB_FILE_NAME!,
-    authToken: process.env.DB_TOKEN! // eliminar para usar en local o usar token
+    authToken: process.env.DB_TOKEN!, // eliminar para usar en local o usar token
   },
 });
