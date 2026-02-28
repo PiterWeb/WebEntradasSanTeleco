@@ -10,7 +10,7 @@ export const GET = (async () => {
     
     const challenge = await createChallenge({
       hmacKey,
-      expires: new Date(Date.now() + 1000 * 60 * 5) // Expiración 5 minutos
+      // expires: new Date(Date.now() + 1000 * 60 * 5) // Expiración 5 minutos
     });
     
     return Response.json(challenge)
