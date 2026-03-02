@@ -29,7 +29,7 @@ export const POST = (async ({ request, redirect }) => {
     if (!ok) throw new Error("verify solution failed")
     
     const reservaMailUnsafe = formData.get("email")?.toString()!
-    const reservaMail = z.email().parse(reservaMailUnsafe)
+    const reservaMail = z.email().parse(reservaMailUnsafe.trim())
     
     const emailHash = await sha512(reservaMail)
     
