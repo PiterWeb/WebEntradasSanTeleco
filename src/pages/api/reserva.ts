@@ -50,10 +50,8 @@ export const POST = (async ({ request, redirect }) => {
         email_hash: emailHash
       }))
       
-      console.log(qrBase64)
-      
       // Send mail
-      resend.emails.send({
+      const { data, error } = await resend.emails.send({
         from: getSecret("EMAIL_ADDRESS"),
         to: reservaMail,
         template: {
@@ -70,10 +68,19 @@ export const POST = (async ({ request, redirect }) => {
           }
         ]
       });
+      
+      if (error) {
+        throw error
+      }
+      
+      console.log(data)
     
     } catch(e) {
       
+      console.error(e)
+      
       if (resultReserva.id) {
+        console.log(`Fallo reserva, borrando registro con id ${resultReserva.id} de base de datos`)
         await DeleteReserva(resultReserva.id)
       }
       
