@@ -14,7 +14,7 @@
     "@tailwindcss/vite": "4.1.18",
     "altcha": "2.3.0",
     "altcha-lib": "1.4.1",
-    "astro": "5.18.0",
+    "astro": "5.17.1",
     "dotenv": "17.2.3",
     "drizzle-orm": "0.45.1",
     "drizzle-zod": "0.8.3",
