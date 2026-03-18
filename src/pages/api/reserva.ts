@@ -89,13 +89,13 @@ export const POST = (async ({ request, redirect }) => {
       throw e
     }
     
-    return redirect(`/reservado`)
+    return redirect(`/st/reservado`)
     
   } catch(e) {
     
     console.error(e)
     
-    return redirect("/fallo-reserva")
+    return redirect("/st/fallo-reserva")
     
   }
   

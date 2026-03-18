@@ -21,5 +21,5 @@ const adapter = async function() {
 export default defineConfig({
   vite: { plugins: [tailwindcss()] },
   adapter: await adapter,
-  base: "/st",
+  base: "/st/",
 });
