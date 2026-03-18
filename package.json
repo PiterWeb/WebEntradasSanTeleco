@@ -6,7 +6,8 @@
     "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "chmod +x ./scripts/initenv.sh && ./scripts/initenv.sh"
   },
   "dependencies": {
     "@astrojs/vercel": "9.0.4",
