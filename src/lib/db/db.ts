@@ -1,14 +1,35 @@
 import { getSecret } from "astro:env/server";
-import { drizzle } from 'drizzle-orm/libsql/web';
 import { reservasTable } from './schema';
 import { eq } from 'drizzle-orm'
 
-const db = drizzle({
-  connection: {
-    url: getSecret("DB_FILE_NAME")!,
-    authToken: getSecret("DB_TOKEN"),
-  }
-});
+const db = await async function () {
+  
+  const local = getSecret("LOCAL") === "true"
+  
+  if (local) {
+    // Este cliente soporta file://
+    const { drizzle } = await import('drizzle-orm/libsql')
+    
+    return drizzle({
+      connection: {
+        url: getSecret("DB_FILE_NAME")!,
+        authToken: getSecret("DB_TOKEN"),
+      }
+    });
+    
+  } 
+  
+  const { drizzle } = await import('drizzle-orm/libsql/web');
+  
+  return drizzle({
+    connection: {
+      url: getSecret("DB_FILE_NAME")!,
+      authToken: getSecret("DB_TOKEN"),
+    }
+  });
+  
+}()
+
 
 export async function GetReservas() {
   return await db.select().from(reservasTable)
