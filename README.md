@@ -67,3 +67,14 @@ Now you should use `npx drizzle-kit push` to create the initial database schema
 3. Add your custom domain to resend modifying DNS records of the domain
 4. Add secret api key to .env RESEND_API_KEY=<api_key>
 5. Add email address to .env EMAIL_ADDRESS=<email_address> (the address must be in the custom domain added)
+
+### Example .env file
+
+```env
+LOCAL=true
+DB_FILE_NAME=file:reservas.db
+DB_TOKEN=xxx
+HMAC_KEY=B78T0uXf+PxvGBEUoGSXWL0d+98bwRasOR0wyj14LvhMHTU3dyIGO3m4uMLrlyTu
+EMAIL_ADDRESS=santeleco@daat.uvigo.es
+RESEND_API_KEY=re_xxx
+``` 
