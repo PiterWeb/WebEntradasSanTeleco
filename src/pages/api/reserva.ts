@@ -51,6 +51,10 @@ export const POST = (async ({ request, redirect }) => {
       }))
       
       // Send mail
+      if (getSecret("LOCAL") === "true") {
+        throw new Error("No mail setup")
+      }
+      
       const { data, error } = await resend.emails.send({
         from: getSecret("EMAIL_ADDRESS"),
         to: reservaMail,
@@ -76,9 +80,7 @@ export const POST = (async ({ request, redirect }) => {
       console.log(data)
     
     } catch(e) {
-      
-      console.error(e)
-      
+            
       if (resultReserva.id) {
         console.log(`Fallo reserva, borrando registro con id ${resultReserva.id} de base de datos`)
         await DeleteReserva(resultReserva.id)
