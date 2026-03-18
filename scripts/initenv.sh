@@ -8,4 +8,4 @@ HMAC_KEY=$HMAC_KEY
 EMAIL_ADDRESS=santeleco@daat.uvigo.es
 RESEND_API_KEY=re_xxx"
 
-echo "$FILE" > .env.example
+echo "$FILE" > .env.local
