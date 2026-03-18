@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --host",
     "astro": "astro",
     "postinstall": "chmod +x ./scripts/initenv.sh && ./scripts/initenv.sh",
     "host": "npm run build && npm run preview"
