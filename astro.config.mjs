@@ -20,5 +20,6 @@ const adapter = async function() {
 // https://astro.build/config
 export default defineConfig({
   vite: { plugins: [tailwindcss()] },
-  adapter: await adapter
+  adapter: await adapter,
+  base: "/st",
 });
