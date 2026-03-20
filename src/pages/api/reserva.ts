@@ -7,11 +7,10 @@ import * as z from "zod/mini";
 import { sha512 } from "../../lib/utils/hash";
 import { verifySolution } from "altcha-lib";
 import { hmacKey } from "../../lib/challenge/challenge";
-import { Resend } from 'resend';
 import { getSecret } from "astro:env/server";
 import { toDataURL } from "qrcode"
-
-const resend = new Resend(getSecret("RESEND_API_KEY")!);
+import { sendMailResend } from "../../lib/mail/resend";
+import { sendMailNodeMailer } from "../../lib/mail/nodemailer";
 
 export const POST = (async ({ request, redirect }) => {
     
@@ -50,35 +49,13 @@ export const POST = (async ({ request, redirect }) => {
         email_hash: emailHash
       }))
       
-      // Send mail
+      // Send mail - if local Nodemailer else Resend
       if (getSecret("LOCAL") === "true") {
-        throw new Error("No mail setup")
+        await sendMailNodeMailer(qrBase64, reservaMail, reserva.full_name)
+      } else {
+        await sendMailResend(qrBase64, reservaMail, reserva.full_name)
       }
       
-      const { data, error } = await resend.emails.send({
-        from: getSecret("EMAIL_ADDRESS"),
-        to: reservaMail,
-        template: {
-          id: 'reservation-confirmation', // Plantilla definida en resend.com
-          variables: {
-            nombre_completo: reserva.full_name
-          },
-        },
-        attachments: [  
-          {
-            content: qrBase64.slice("data:image/png;base64,".length),
-            filename: "qr.png",
-            contentId: "qr"
-          }
-        ]
-      });
-      
-      if (error) {
-        throw error
-      }
-      
-      console.log(data)
-    
     } catch(e) {
             
       if (resultReserva.id) {
