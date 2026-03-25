@@ -1,6 +1,6 @@
 import { getSecret } from "astro:env/server";
 import { reservasTable } from './schema';
-import { eq } from 'drizzle-orm'
+import { eq, and } from 'drizzle-orm'
 
 const db = await async function () {
   
@@ -39,8 +39,8 @@ export async function RequestReserva(reserva: typeof reservasTable.$inferInsert)
   return await db.insert(reservasTable).values(reserva).returning({ id: reservasTable.id})
 }
 
-export async function GetReservaById(id: string) {
-  return await db.select().from(reservasTable).where(eq(reservasTable.id, id))
+export async function GetReservaByIdAndEmailHash(id: string, emailHash: string) {
+  return await db.select().from(reservasTable).where(and(eq(reservasTable.id, id), eq(reservasTable.emailHash, emailHash)))
 }
 
 export async function DeleteReserva(id: string) {

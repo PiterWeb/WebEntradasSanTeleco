@@ -1,11 +1,20 @@
 
 HMAC_KEY=$(openssl rand -base64 48)
 
-FILE="LOCAL=true
+FILE="
+LOCAL=true
+HMAC_KEY=$HMAC_KEY
+
+# DB
 DB_FILE_NAME=file:reservas.db
 DB_TOKEN=xxx
-HMAC_KEY=$HMAC_KEY
+
+# RESEND
+RESEND_API_KEY=re_xxx
+
+# EMAIL
 EMAIL_ADDRESS=santeleco@daat.uvigo.es
-RESEND_API_KEY=re_xxx"
+GOOGLE_APP_PASSWORD=xxx
+"
 
 echo "$FILE" > .env

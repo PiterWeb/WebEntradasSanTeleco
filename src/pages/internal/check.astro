@@ -1,0 +1,97 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"
+
+---
+
+<script>
+
+import QrScanner from 'qr-scanner'; 
+
+const videoElement = document.getElementById("qr-video") as HTMLVideoElement
+const resultElement = document.getElementById("result") as HTMLSpanElement
+
+const scanBtn = document.getElementById("scan-btn") as HTMLButtonElement
+const buyBtn = document.getElementById("buy-btn") as HTMLButtonElement
+
+let currentUser: {id?: string; emailHash?: string} = {}
+
+async function scanQr() {
+  
+  const scanner = new QrScanner(
+    videoElement,
+    async result => {
+      try {
+        
+        buyBtn.classList.add("hidden")
+        
+        const {id , email_hash} = JSON.parse(result.data)
+        
+        const res = await fetch(`/api/internal/check?id=${encodeURI(id)}&email_hash=${encodeURI(email_hash)}`, {
+          method: "GET"
+        })
+        
+        if (!res.ok) {
+          throw new Error()
+        }
+        
+        const resData = await res.json() as {
+           id: string;
+           full_name: string;
+           verified: boolean | null;
+           emailHash: string;
+       }[]
+                
+        if (resData?.length === 0) {
+          resultElement.innerText = "No hay reserva"
+          return
+        }
+        
+        if (!resData[0].verified) {
+          resultElement.innerText = "Reservada"
+          currentUser.id = id
+          currentUser.emailHash = email_hash
+          buyBtn.classList.remove("hidden")
+        } else {
+          resultElement.innerText = "Comprada"
+        }
+        
+      } catch {
+        resultElement.innerText = "Hubo un error en el proceso de verificación"
+      } finally {
+        scanner.stop()
+      }
+      
+    },
+    {}
+  )
+  
+  await scanner.start()
+}
+
+async function buy() {
+  
+}
+
+scanBtn.addEventListener("click", scanQr)
+buyBtn.addEventListener("click", buy)
+
+</script>
+
+<MainLayout>
+    <div class="flex flex-col gap-4">
+        <p class="text-white">Resultado: <span id="result"></span></p>
+        
+        <div class="flex flex-row">
+            <button id="scan-btn" class="rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm dark:hover:bg-indigo-700">
+                Escanear
+            </button>
+            <button id="buy-btn" class="hidden rounded-md bg-green-400 px-5 py-2.5 text-sm font-medium text-white shadow-sm dark:hover:bg-indigo-700">
+                Marcar como comprado
+            </button>
+        </div>
+        
+        
+        <video id="qr-video"></video>
+    </div>
+    
+</MainLayout>
