@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
-    "preview": "NODE_ENV=production astro preview --host",
+    "preview": "astro preview",
     "astro": "astro",
     "postinstall": "chmod +x ./scripts/initenv.sh && ./scripts/initenv.sh",
-    "host": "pnpm run build && pnpm run preview"
+    "host": "pnpm run build && node ./dist/server/entry.mjs"
   },
   "dependencies": {
     "@astrojs/node": "10.0.2",
