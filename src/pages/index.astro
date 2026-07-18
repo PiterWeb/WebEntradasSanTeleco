@@ -19,7 +19,7 @@ import MainLayout from "../layouts/MainLayout.astro"
 </script>
 
 <MainLayout>
-        <div class="mx-auto max-w-prose text-center">
+        <section class="mx-auto max-w-prose text-center">
           <h1 class="title text-center font-bold text-8xl text-white">
               San Teleco
             <strong class="text-indigo-600"> 2026 </strong>
@@ -38,9 +38,28 @@ import MainLayout from "../layouts/MainLayout.astro"
                 FAQ 
             </a>
           </div>
-        </div>
-        <div id="partners">
-
-        </div>
+        </section>
+        <section>
+            <h3 class="pt-12 subtitle text-center mt-4 text-pretty text-4xl text-gray-200 underline">Partners</h3>
+            <div id="partners" class="pt-6 *:rounded *:shadow-xl *:shadow-indigo-800 *:ring-4 *:ring-indigo-800 *:p-0.5 *:bg-indigo-800">
+                
+            </div>
+        </section>
 </MainLayout>
 
+<style>
+
+    #partners {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);   
+        
+        @media (width >= 48rem) {
+            grid-template-columns: repeat(3, 1fr);   
+        }
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+    }
+
+</style>
