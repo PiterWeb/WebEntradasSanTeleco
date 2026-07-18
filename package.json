@@ -22,6 +22,7 @@
     "drizzle-orm": "0.45.1",
     "drizzle-zod": "0.8.3",
     "nodemailer": "8.0.3",
+    "pocketbase": "0.27.0",
     "qr-scanner": "1.4.2",
     "qrcode": "1.5.4",
     "resend": "6.9.2",

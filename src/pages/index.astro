@@ -2,6 +2,22 @@
 import MainLayout from "../layouts/MainLayout.astro"
 ---
 
+<script>
+
+  import { getPartners } from "../lib/pb/Partners"
+
+  const partnersDiv = document.getElementById("partners") as HTMLDivElement
+  
+  const partners = await getPartners()
+
+  partners.forEach(p => {
+    const imgElement = document.createElement("img")
+    imgElement.src = p.logo 
+    partnersDiv.appendChild(imgElement)
+  })
+  
+</script>
+
 <MainLayout>
         <div class="mx-auto max-w-prose text-center">
           <h1 class="title text-center font-bold text-8xl text-white">
@@ -22,6 +38,9 @@ import MainLayout from "../layouts/MainLayout.astro"
                 FAQ 
             </a>
           </div>
+        </div>
+        <div id="partners">
+
         </div>
 </MainLayout>
 

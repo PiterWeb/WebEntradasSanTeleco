@@ -41,6 +41,9 @@ importers:
       nodemailer:
         specifier: 8.0.3
         version: 8.0.3
+      pocketbase:
+        specifier: ^0.27.0
+        version: 0.27.0
       qr-scanner:
         specifier: 1.4.2
         version: 1.4.2
@@ -2360,6 +2363,9 @@ packages:
   pngjs@5.0.0:
     resolution: {integrity: sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==}
     engines: {node: '>=10.13.0'}
+
+  pocketbase@0.27.0:
+    resolution: {integrity: sha512-K5N6d93UP/BNMbMnlZ6BUfy9VPCIvLyqhJFOsNI8OsZwzvKWEAfyD36boi5K4ECIOl5HMlo0TzuaeGdKpMwizQ==}
 
   postal-mime@2.7.3:
     resolution: {integrity: sha512-MjhXadAJaWgYzevi46+3kLak8y6gbg0ku14O1gO/LNOuay8dO+1PtcSGvAdgDR0DoIsSaiIA8y/Ddw6MnrO0Tw==}
@@ -5095,6 +5101,8 @@ snapshots:
   picomatch@4.0.3: {}
 
   pngjs@5.0.0: {}
+
+  pocketbase@0.27.0: {}
 
   postal-mime@2.7.3: {}
 
