@@ -15,11 +15,11 @@ const adapter = async function() {
   const vercel = (await import("@astrojs/vercel")).default
   
   return vercel()
-}()
+}
 
 // https://astro.build/config
 export default defineConfig({
   vite: { plugins: [tailwindcss()] },
-  adapter: await adapter,
-  // base: "/st",
+  adapter: await adapter(),
+  site: "https://santeleco.uvigo.es"
 });
